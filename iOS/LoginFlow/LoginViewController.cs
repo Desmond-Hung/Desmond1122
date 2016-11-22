@@ -1,6 +1,5 @@
 ﻿using System;
 using UIKit;
-using static System.Console;
 
 namespace Desmond.iOS
 {
@@ -17,7 +16,7 @@ namespace Desmond.iOS
 			btnLogin.TouchUpInside += (sender, e) => 
 			{
 				//TODO:點擊事件
-				WriteLine("Click btnLogin");
+				Console.WriteLine("Click btnLogin");
 			};
 		}
 
