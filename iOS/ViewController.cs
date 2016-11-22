@@ -17,9 +17,9 @@ namespace Desmond.iOS
 			base.ViewDidLoad();
 
 			// Code to start the Xamarin Test Cloud Agent
-#if ENABLE_TEST_CLOUD
-			Xamarin.Calabash.Start ();
-#endif
+			//#if ENABLE_TEST_CLOUD
+			//			Xamarin.Calabash.Start ();
+			//#endif
 
 			// Perform any additional setup after loading the view, typically from a nib.
 			Button.AccessibilityIdentifier = "myButton";
