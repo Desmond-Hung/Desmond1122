@@ -107,11 +107,15 @@
     <Folder Include="WebFlow\" />
     <Folder Include="LoginFlow\" />
     <Folder Include="MapFlow\" />
+    <Folder Include="Cell\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Resources\MapFlow\MapViewController.xib" />
+    <InterfaceDefinition Include="MenuViewController.xib" />
+    <InterfaceDefinition Include="DetailViewController.xib" />
+    <InterfaceDefinition Include="Cell\UserViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -135,6 +139,18 @@
     <Compile Include="WebFlow\WebViewController.cs" />
     <Compile Include="WebFlow\WebViewController.designer.cs">
       <DependentUpon>WebViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuViewController.cs" />
+    <Compile Include="MenuViewController.designer.cs">
+      <DependentUpon>MenuViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DetailViewController.cs" />
+    <Compile Include="DetailViewController.designer.cs">
+      <DependentUpon>DetailViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cell\UserViewCell.cs" />
+    <Compile Include="Cell\UserViewCell.designer.cs">
+      <DependentUpon>UserViewCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

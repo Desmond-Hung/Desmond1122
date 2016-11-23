@@ -1,13 +1,11 @@
 ﻿using System;
-
+using System.Threading.Tasks;
 using UIKit;
 
 namespace Desmond.iOS
 {
 	public partial class ViewController : UIViewController
 	{
-		int count = 1;
-
 		public ViewController(IntPtr handle) : base(handle)
 		{
 		}
@@ -15,19 +13,14 @@ namespace Desmond.iOS
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-
-			// Code to start the Xamarin Test Cloud Agent
-			//#if ENABLE_TEST_CLOUD
-			//			Xamarin.Calabash.Start ();
-			//#endif
-
-			// Perform any additional setup after loading the view, typically from a nib.
-			Button.AccessibilityIdentifier = "myButton";
-			Button.TouchUpInside += delegate
+			// 另外開Thread跑程式
+			Task.Run(() =>
 			{
-				var title = string.Format("{0} clicks!", count++);
-				Button.SetTitle(title, UIControlState.Normal);
-			};
+				Task.Delay(2000); //假裝做事
+				InvokeOnMainThread(() => { //呼叫主Thread進行換頁
+					PerformSegue("moveToLoginViewSegue", this);
+				});
+			});
 		}
 
 		public override void DidReceiveMemoryWarning()
