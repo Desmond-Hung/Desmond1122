@@ -26,6 +26,22 @@ namespace Desmond.iOS
 			};
 			txtURL.Text = DefaultURL;
 			GoLink(this.DefaultURL);
+
+			// 註冊觸發鍵盤後調整layout
+			UIKeyboard.Notifications.ObserveWillChangeFrame((sender, e) =>
+			{
+				var beginRect = e.FrameBegin;
+				var endRect = e.FrameEnd;
+
+				InvokeOnMainThread(() =>
+				{
+					UIView.Animate(1, () =>
+					{
+						btnGoBottomConstraint.Constant = endRect.Height + 5;
+						View.LayoutIfNeeded();
+					});
+				});
+			});
 		}
 
 		public override void DidReceiveMemoryWarning()

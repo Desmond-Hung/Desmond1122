@@ -16,6 +16,9 @@ namespace Desmond.iOS
 		UIKit.UIButton btnGo { get; set; }
 
 		[Outlet]
+		UIKit.NSLayoutConstraint btnGoBottomConstraint { get; set; }
+
+		[Outlet]
 		UIKit.UITextField txtURL { get; set; }
 
 		[Outlet]
@@ -23,9 +26,14 @@ namespace Desmond.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (viewWeb != null) {
-				viewWeb.Dispose ();
-				viewWeb = null;
+			if (btnGoBottomConstraint != null) {
+				btnGoBottomConstraint.Dispose ();
+				btnGoBottomConstraint = null;
+			}
+
+			if (btnGo != null) {
+				btnGo.Dispose ();
+				btnGo = null;
 			}
 
 			if (txtURL != null) {
@@ -33,9 +41,9 @@ namespace Desmond.iOS
 				txtURL = null;
 			}
 
-			if (btnGo != null) {
-				btnGo.Dispose ();
-				btnGo = null;
+			if (viewWeb != null) {
+				viewWeb.Dispose ();
+				viewWeb = null;
 			}
 		}
 	}
