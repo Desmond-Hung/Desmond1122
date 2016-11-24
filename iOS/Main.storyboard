@@ -177,9 +177,24 @@
                     <view key="view" contentMode="scaleToFill" id="1WY-zE-oLe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKH-aA-qls">
+                                <rect key="frame" x="295" y="629" width="64" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="IFF-A6-Jwf"/>
+                                    <constraint firstAttribute="height" constant="30" id="Rdh-JH-chv"/>
+                                </constraints>
+                                <state key="normal" title="WebView"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="0.98420815449999999" blue="0.82121378960000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZKH-aA-qls" firstAttribute="trailing" secondItem="1WY-zE-oLe" secondAttribute="trailingMargin" id="dRk-na-f2k"/>
+                            <constraint firstItem="2dX-7Q-zRg" firstAttribute="top" secondItem="ZKH-aA-qls" secondAttribute="bottom" constant="8" id="olZ-ce-F85"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnWeb" destination="ZKH-aA-qls" id="R4i-eU-LPg"/>
                         <segue destination="Fm5-oq-xZA" kind="showDetail" identifier="moveToWebViewSegue" id="lDF-sh-FNs"/>
                         <segue destination="Rov-gq-ebG" kind="showDetail" identifier="moveToMapViewSegue" id="nTt-9k-c8O"/>
                     </connections>

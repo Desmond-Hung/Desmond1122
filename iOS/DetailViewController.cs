@@ -16,6 +16,11 @@ namespace Desmond.iOS
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
 			Title = this.SelectedUser.Name;
+
+			btnWeb.TouchUpInside += (sender, e) =>
+			{
+				PerformSegue("moveToWebViewSegue", this);
+			};
 		}
 
 		public override void DidReceiveMemoryWarning()
