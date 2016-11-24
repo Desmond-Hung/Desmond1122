@@ -16,7 +16,7 @@ namespace Desmond.iOS
 		{
 			base.ViewDidLoad();
 
-			// 利用WebView連網頁後，利用網址的變化來分析字串，啟動Local端Function
+			// 利用WebView連網頁，每次網址變化都會觸發ShouldStartLoad，再利用網址的變化來分析字串，啟動Local端Function
 			viewWeb.LoadHtmlString(@"
 			<html>
 				<head>
@@ -44,12 +44,12 @@ namespace Desmond.iOS
 					if (components[1] == @"Hi")
 					{
 						UIAlertController alert = UIAlertController.Create(@"Hi Title", @"當然是世界好", UIAlertControllerStyle.Alert);
+
 						UIAlertAction okAction = UIAlertAction.Create(@"OK", UIAlertActionStyle.Default, (action) =>
 						{
 							Console.WriteLine(@"OK");
 						});
 						alert.AddAction(okAction);
-
 						UIAlertAction cancelAction = UIAlertAction.Create(@"Cancel", UIAlertActionStyle.Default, (action) =>
 						{
 							Console.WriteLine(@"Cancel");
@@ -57,11 +57,15 @@ namespace Desmond.iOS
 						alert.AddAction(cancelAction);
 
 						PresentViewController(alert, true, null);
-
 						return false;
 					}
 				}
 				return true;
+			};
+
+			btnGo.TouchUpInside += (sender, e) => 
+			{
+				ClickGo();
 			};
 		}
 
@@ -74,7 +78,10 @@ namespace Desmond.iOS
 		private void ClickGo()
 		{ 
 			var web_URL = txtURL.Text;
-			GoLink(web_URL);
+			if (web_URL != "")
+			{ 
+				GoLink(web_URL);
+			}
 		}
 
 		private void GoLink(string web_URL)
