@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBE-Ac-vcx">
-                                <rect key="frame" x="90" y="318" width="194" height="30"/>
+                                <rect key="frame" x="90.5" y="318.5" width="194" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="VBT-59-iOP"/>
                                 </constraints>
@@ -60,7 +60,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Account" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EeB-70-oyU">
-                                <rect key="frame" x="88" y="210" width="200" height="30"/>
+                                <rect key="frame" x="87.5" y="210" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="c1B-VE-b4d"/>
                                     <constraint firstAttribute="width" constant="200" id="vax-lp-Sf7"/>
@@ -70,7 +70,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f6p-4S-tXZ">
-                                <rect key="frame" x="88" y="268" width="200" height="30"/>
+                                <rect key="frame" x="87.5" y="268" width="200" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -177,7 +177,7 @@
                     <view key="view" contentMode="scaleToFill" id="1WY-zE-oLe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.98420815449999999" blue="0.82121378960000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <segue destination="Fm5-oq-xZA" kind="showDetail" identifier="moveToWebViewSegue" id="lDF-sh-FNs"/>
@@ -226,7 +226,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jIh-4f-Dzv" id="p3I-Nt-3N3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Kp-CI-xot">
@@ -271,7 +271,7 @@
                     <navigationItem key="navigationItem" id="BAe-Ty-UXj"/>
                     <connections>
                         <outlet property="tableUser" destination="zK3-Vr-Chi" id="diz-4h-LOw"/>
-                        <segue destination="iba-lN-9M2" kind="show" identifier="moveToDetailViewSegue" id="p3D-fo-taj"/>
+                        <segue destination="iba-lN-9M2" kind="presentation" identifier="moveToDetailViewSegue" modalTransitionStyle="partialCurl" id="p3D-fo-taj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hfN-h2-civ" userLabel="First Responder" sceneMemberID="firstResponder"/>

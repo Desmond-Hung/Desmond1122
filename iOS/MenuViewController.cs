@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UIKit;
 
 namespace Desmond.iOS
 {
 	public partial class MenuViewController : UIViewController
 	{
+		private User SelectedUser;
+
 		public MenuViewController(IntPtr handle) : base(handle)
 		{
 		}
@@ -17,13 +20,27 @@ namespace Desmond.iOS
 			ShowTable();
 		}
 
+		public override void PrepareForSegue(UIStoryboardSegue segue, Foundation.NSObject sender)
+		{
+			base.PrepareForSegue(segue, sender);
+
+			if (segue.Identifier == "moveToDetailViewSegue")
+			{
+				if (segue.DestinationViewController is DetailViewController)
+				{
+					var destViewController = segue.DestinationViewController as DetailViewController;
+					destViewController.SelectedUser = SelectedUser;
+				}
+			}
+		}
+
 		public override void DidReceiveMemoryWarning()
 		{
 			base.DidReceiveMemoryWarning();
 			// Release any cached data, images, etc that aren't in use.
 		}
 
-		public void ShowTable()
+		private void ShowTable()
 		{
 			// 範例資料
 			var list = new List<User>
@@ -42,8 +59,13 @@ namespace Desmond.iOS
 			tableSource.UserSelected += delegate (object sender, UserSelectedEventArgs e)
 			{
 				Console.WriteLine(e.SelectedUser.Name);
+				this.SelectedUser = e.SelectedUser;
+				InvokeOnMainThread(() =>
+				{
+					PerformSegue("moveToDetailViewSegue", this);
+				});
 			};
-			tableUser.ReloadData();
+			tableUser.ReloadData(); //預計在main thread呼叫
 		}
 
 		public class UserTableSource : UITableViewSource
@@ -94,12 +116,13 @@ namespace Desmond.iOS
 			/// 設計事件，回傳結果給呼叫端
 			/// </summary>
 			public event EventHandler<UserSelectedEventArgs> UserSelected;
-		}
-
+   		}
 		public class UserSelectedEventArgs : EventArgs
 		{
 			public User SelectedUser { get; set; }
 		}
+	
+
 	}
 }
 

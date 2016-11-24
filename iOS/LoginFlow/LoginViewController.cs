@@ -21,7 +21,8 @@ namespace Desmond.iOS
 			Worker = new WebWorker();
 			Worker.HtmlStringReceived += (sender, e) =>
 			{
-				Console.WriteLine(e.Html);
+				//Console.WriteLine(e.Html);
+				Console.WriteLine("已取得Html");
 				PerformSegue("moveToMenuViewSegue", this);
 			};
 

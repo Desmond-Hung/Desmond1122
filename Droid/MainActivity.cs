@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android.Content;
 
 namespace Desmond.Droid
 {
@@ -25,8 +26,8 @@ namespace Desmond.Droid
 			_btnLogin = FindViewById<Button>(Resource.Id.loginflow_loginview_btnlogin);
 
 			_btnLogin.Click += (sender, e) => 
-			{ 
-				//TODO: Login
+			{
+				StartActivity(typeof(MenuActivity));
 			};
 		}
 	}

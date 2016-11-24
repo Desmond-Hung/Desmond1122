@@ -6,6 +6,7 @@ namespace Desmond.iOS
 {
 	public partial class DetailViewController : UIViewController
 	{
+		public User SelectedUser { get; internal set; }
 		public DetailViewController(IntPtr handle) : base(handle)
 		{
 		}
@@ -14,6 +15,7 @@ namespace Desmond.iOS
 		{
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
+			Title = this.SelectedUser.Name;
 		}
 
 		public override void DidReceiveMemoryWarning()

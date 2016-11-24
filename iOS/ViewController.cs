@@ -16,7 +16,12 @@ namespace Desmond.iOS
 			// 另外開Thread跑程式
 			Task.Run(() =>
 			{
-				Task.Delay(2000); //假裝做事
+				Console.WriteLine("進入Thread");
+				for (int i = 0; i < 5; i++) 
+				{
+					Console.WriteLine("Delay 1 second");
+					Task.Delay(1000); //假裝做事
+				}
 				InvokeOnMainThread(() => { //呼叫主Thread進行換頁
 					PerformSegue("moveToLoginViewSegue", this);
 				});
