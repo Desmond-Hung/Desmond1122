@@ -13,7 +13,7 @@ using Android.Views;
 using Android.Content;
 using Android.Runtime;
 using Android.Views.InputMethods;
-
+using AndroidHUD;
 using Java.Interop;
 
 using Debug = System.Diagnostics.Debug;
@@ -49,7 +49,7 @@ namespace Desmond.Droid
 			{
 				RunOnUiThread(() =>
 				{
-					//AndHUD.Shared.Dismiss(this);
+					AndHUD.Shared.Dismiss(this);
 				});
 			};
 
@@ -68,15 +68,14 @@ namespace Desmond.Droid
 			MyWebView.AddJavascriptInterface(myJSInterface, "TP");
 			myJSInterface.CallFromPageReceived += delegate (object sender, MyJSInterface.CallFromPageReceivedEventArgs e)
 			{
-				Debug.WriteLine(e.Result);
+				Debug.WriteLine("CallFromPageReceived:"+e.Result);
 			};
 
 			// 負責與頁面溝通 - Native -> WebView
 			JavaScriptResult callResult = new JavaScriptResult();
 			callResult.JavaScriptResultReceived += (object sender, JavaScriptResult.JavaScriptResultReceivedEventArgs e) =>
 			{
-
-				Debug.WriteLine(e.Result);
+				Debug.WriteLine("JavascriptResultReceived:"+e.Result);
 			};
 
 
@@ -108,14 +107,11 @@ namespace Desmond.Droid
 
 			_InputMethodManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
 
-
-			/*
-			TxtUrl = FindViewById<EditText> (Resource.Id.txtUrl);
-			TxtUrl.TextChanged += (object sender,
-				Android.Text.TextChangedEventArgs e) => {
+			/**/
+			TxtUrl = FindViewById<EditText> (Resource.Id.webflow_webview_txturl);
+			TxtUrl.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) => {
 				Debug.WriteLine( TxtUrl.Text +":"+ e.Text );
 			};
-			*/
 
 			#endregion
 
@@ -192,18 +188,16 @@ namespace Desmond.Droid
 			[JavascriptInterface]
 			public void CallFromPage(string parameter)
 			{
-				Console.WriteLine($"CallFromPage:{parameter}");
+				Console.WriteLine($"CallFromPage:{parameter}"); //直接進出從JS傳來的參數
 
-				EventHandler<CallFromPageReceivedEventArgs> handler =
-					CallFromPageReceived;
+				EventHandler<CallFromPageReceivedEventArgs> handler = CallFromPageReceived;
 
 				if (null != handler)
 				{
-					handler(this,
-						new CallFromPageReceivedEventArgs
-						{
-							Result = parameter
-						});
+					handler(this, new CallFromPageReceivedEventArgs
+					{
+						Result = parameter
+					});
 				}
 			}
 
@@ -215,19 +209,14 @@ namespace Desmond.Droid
 			}
 		}
 
-
 		// Call Page
 		public class JavaScriptResult : Java.Lang.Object, IValueCallback
 		{
-
 			public void OnReceiveValue(Java.Lang.Object result)
 			{
 				Java.Lang.String json = (Java.Lang.String)result;
-
 				var resultString = json.ToString();
-
-				EventHandler<JavaScriptResultReceivedEventArgs> handler =
-					JavaScriptResultReceived;
+				EventHandler<JavaScriptResultReceivedEventArgs> handler = JavaScriptResultReceived;
 
 				if (null != handler)
 				{
@@ -237,32 +226,23 @@ namespace Desmond.Droid
 							Result = resultString ?? ""
 						});
 				}
-
-
 			}
-
 			public event EventHandler<JavaScriptResultReceivedEventArgs> JavaScriptResultReceived;
-
 			public class JavaScriptResultReceivedEventArgs : EventArgs
 			{
 				public string Result { get; set; }
 			}
-
 		}
 
 		public class MyWebClient : WebViewClient { }
 
 		public class ContentWebViewClient : WebViewClient
 		{
-
 			public event EventHandler<WebViewLocaitonChangedEventArgs> WebViewLocaitonChanged;
-
 			public event EventHandler<WebViewLoadCompletedEventArgs> WebViewLoadCompleted;
-
 			public override bool ShouldOverrideUrlLoading(WebView view, string url)
 			{
 				EventHandler<WebViewLocaitonChangedEventArgs> handler = WebViewLocaitonChanged;
-
 				if (null != handler)
 				{
 					handler(this, new WebViewLocaitonChangedEventArgs
@@ -270,9 +250,7 @@ namespace Desmond.Droid
 						CommandString = url
 					});
 				}
-
 				return base.ShouldOverrideUrlLoading(view, url);
-
 			}
 
 
