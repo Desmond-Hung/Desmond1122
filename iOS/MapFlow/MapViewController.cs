@@ -9,7 +9,7 @@ namespace Desmond.iOS
 {
 	public partial class MapViewController : UIViewController
 	{
-		public Location myLocation { get; set; }
+		public Restaurant SelectedItem { get; set; }
 
 		public MapViewController(IntPtr handle) : base(handle)
 		{
@@ -31,17 +31,17 @@ namespace Desmond.iOS
 			// 顯示User位置
 			viewMap.ShowsUserLocation = true;
 			//星下點
-			if (myLocation != null)
+			if (SelectedItem.Location2D != null)
 			{ 
-				var myLoc = new CLLocationCoordinate2D(myLocation.Lat, myLocation.Lng);
+				var myLoc = new CLLocationCoordinate2D(SelectedItem.Location2D.Lat, SelectedItem.Location2D.Lng);
 				viewMap.CenterCoordinate = myLoc;
-				var mapRegion = MKCoordinateRegion.FromDistance(myLoc, 4000, 4000);
+				var mapRegion = MKCoordinateRegion.FromDistance(myLoc, 1000, 1000);
 				viewMap.Region = mapRegion;
 				viewMap.AddAnnotations(new MKPointAnnotation()
 				{
-					Title = "JetFusion",
+					Title = SelectedItem.Name,
 					Coordinate = myLoc,
-					Subtitle = String.Format("({0}, {1})", myLocation.Lat, myLocation.Lng)
+					Subtitle = String.Format("({0}, {1})", SelectedItem.Location2D.Lat, SelectedItem.Location2D.Lng)
 				});
 			}
 

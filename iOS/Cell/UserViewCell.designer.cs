@@ -13,6 +13,9 @@ namespace Desmond.iOS
 	partial class UserViewCell
 	{
 		[Outlet]
+		UIKit.UIImageView imgPhoto { get; set; }
+
+		[Outlet]
 		UIKit.UILabel lbDescription { get; set; }
 
 		[Outlet]
@@ -20,14 +23,19 @@ namespace Desmond.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (lbName != null) {
-				lbName.Dispose ();
-				lbName = null;
+			if (imgPhoto != null) {
+				imgPhoto.Dispose ();
+				imgPhoto = null;
 			}
 
 			if (lbDescription != null) {
 				lbDescription.Dispose ();
 				lbDescription = null;
+			}
+
+			if (lbName != null) {
+				lbName.Dispose ();
+				lbName = null;
 			}
 		}
 	}

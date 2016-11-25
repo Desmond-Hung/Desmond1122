@@ -17,6 +17,15 @@ namespace Desmond.iOS
 
 		[Outlet]
 		UIKit.UIButton btnWeb { get; set; }
+
+		[Outlet]
+		UIKit.UIImageView imgPhoto { get; set; }
+
+		[Outlet]
+		UIKit.UILabel txtName { get; set; }
+
+		[Outlet]
+		UIKit.UILabel txtPhone { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -28,6 +37,21 @@ namespace Desmond.iOS
 			if (btnWeb != null) {
 				btnWeb.Dispose ();
 				btnWeb = null;
+			}
+
+			if (imgPhoto != null) {
+				imgPhoto.Dispose ();
+				imgPhoto = null;
+			}
+
+			if (txtName != null) {
+				txtName.Dispose ();
+				txtName = null;
+			}
+
+			if (txtPhone != null) {
+				txtPhone.Dispose ();
+				txtPhone = null;
 			}
 		}
 	}

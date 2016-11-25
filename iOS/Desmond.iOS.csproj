@@ -108,6 +108,7 @@
     <Folder Include="LoginFlow\" />
     <Folder Include="MapFlow\" />
     <Folder Include="Cell\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -150,6 +151,13 @@
     <Compile Include="Cell\UserViewCell.designer.cs">
       <DependentUpon>UserViewCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="IOSWorker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Images\res_type_1.png" />
+    <BundleResource Include="Images\res_type_2.png" />
+    <BundleResource Include="Images\res_type_3.png" />
+    <BundleResource Include="Images\res_type_4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

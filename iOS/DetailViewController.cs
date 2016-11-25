@@ -6,7 +6,7 @@ namespace Desmond.iOS
 {
 	public partial class DetailViewController : UIViewController
 	{
-		public User SelectedUser { get; internal set; }
+		public Restaurant SelectedItem { get; internal set; }
 		public DetailViewController(IntPtr handle) : base(handle)
 		{
 		}
@@ -15,7 +15,7 @@ namespace Desmond.iOS
 		{
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
-			Title = this.SelectedUser.Name;
+			Title = "餐廳資訊";
 
 			btnWeb.TouchUpInside += (sender, e) =>
 			{
@@ -31,6 +31,16 @@ namespace Desmond.iOS
 					PerformSegue("moveToMapViewSegue", this);
 				});
 			};
+
+			ShowDetail();
+		}
+
+		public void ShowDetail()
+		{ 
+			this.imgPhoto.Image = UIImage.FromFile("Images/" + SelectedItem.Image);
+			this.txtName.Text = SelectedItem.Name;
+			this.btnMap.SetTitle(SelectedItem.Address, UIControlState.Normal);
+			this.txtPhone.Text = SelectedItem.Phone;
 		}
 
 		public override void PrepareForSegue(UIStoryboardSegue segue, Foundation.NSObject sender)
@@ -41,7 +51,8 @@ namespace Desmond.iOS
 			{
 				if (segue.DestinationViewController is WebViewController)
 				{
-					var destViewController = segue.DestinationViewController as DetailViewController;
+					var destViewController = segue.DestinationViewController as WebViewController;
+					destViewController.SearchTarget = SelectedItem.Name;
 				}
 			}
 			else if (segue.Identifier == "moveToMapViewSegue")
@@ -49,7 +60,7 @@ namespace Desmond.iOS
 				if (segue.DestinationViewController is MapViewController)
 				{ 
 					var destViewController = segue.DestinationViewController as MapViewController;
-					destViewController.myLocation = new Location() { Lat = 22.6267495, Lng = 120.323166 };
+					destViewController.SelectedItem = SelectedItem;
 				}
 			}
 		}

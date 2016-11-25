@@ -7,7 +7,7 @@ namespace Desmond.iOS
 {
 	public partial class MenuViewController : UIViewController
 	{
-		private User SelectedUser;
+		private Restaurant SelectedItem;
 
 		public MenuViewController(IntPtr handle) : base(handle)
 		{
@@ -17,6 +17,7 @@ namespace Desmond.iOS
 		{
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
+			Title = "餐廳列表";
 			ShowTable();
 		}
 
@@ -29,7 +30,7 @@ namespace Desmond.iOS
 				if (segue.DestinationViewController is DetailViewController)
 				{
 					var destViewController = segue.DestinationViewController as DetailViewController;
-					destViewController.SelectedUser = SelectedUser;
+					destViewController.SelectedItem = SelectedItem;
 				}
 			}
 		}
@@ -42,24 +43,17 @@ namespace Desmond.iOS
 
 		private void ShowTable()
 		{
-			// 範例資料
-			var list = new List<User>
-			{
-				new User {Name = @"Aa", Description = @"使用者 甲"},
-				new User {Name = @"Bb", Description = @"使用者 乙"},
-				new User {Name = @"Cc", Description = @"使用者 丙"},
-				new User {Name = @"Dd", Description = @"使用者 丁"}
-			};
+			List<Restaurant> ItemList = new RestaurantWorker().GetDemoRestaurants(new IOSWorker()); //collect shop data
 
 			// UITableViewSource
-			var tableSource = new UserTableSource(list);
+			var tableSource = new UserTableSource(ItemList);
 			tableUser.Source = tableSource;
 
 			// Table內的點擊事件，預先宣告接收到事件後要做的事
 			tableSource.UserSelected += delegate (object sender, UserSelectedEventArgs e)
 			{
-				Console.WriteLine(e.SelectedUser.Name);
-				this.SelectedUser = e.SelectedUser;
+				//Console.WriteLine(e.SelectedUser.Name);
+				this.SelectedItem = e.SelectedItem;
 				InvokeOnMainThread(() =>
 				{
 					PerformSegue("moveToDetailViewSegue", this);
@@ -72,11 +66,11 @@ namespace Desmond.iOS
 		{
 			// CellView Identifier，輸入storyboard內定義的cell identifier
 			const string CellViewIdentifier = @"UserViewCell";
-			private List<User> Users { get; set; }
-			public UserTableSource(IEnumerable<User> users)
+			private List<Restaurant> Items { get; set; }
+			public UserTableSource(IEnumerable<Restaurant> users)
 			{
-				Users = new List<User>();
-				Users.AddRange(users);
+				Items = new List<Restaurant>();
+				Items.AddRange(users);
 			}
 
 			// Model -> Controller -> View
@@ -84,18 +78,18 @@ namespace Desmond.iOS
 			// Memory
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
-				return (nint)Users.Count;
+				return (nint)Items.Count;
 			}
 
 			// Controller -> View
 			public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
 			{
 				// 取得一列要顯示的一筆資料
-				User myClass = Users[indexPath.Row];
+				Restaurant item = Items[indexPath.Row];
 				// 利用identifier取得UserViewCell
 				var cell = tableView.DequeueReusableCell(CellViewIdentifier) as UserViewCell;
 				// 更新View的顯示資料
-				cell.UpdateUI(myClass);
+				cell.UpdateUI(item);
 				return cell;
 			}
 
@@ -103,11 +97,11 @@ namespace Desmond.iOS
 			public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
 			{
 				tableView.DeselectRow(indexPath, true);
-				User user = Users[indexPath.Row];
+				Restaurant item = Items[indexPath.Row];
 				EventHandler<UserSelectedEventArgs> handle = UserSelected;
 				if (null != handle)
 				{
-					var args = new UserSelectedEventArgs { SelectedUser = user };
+					var args = new UserSelectedEventArgs { SelectedItem = item };
 					handle(this, args);
 				}
 			}
@@ -119,7 +113,7 @@ namespace Desmond.iOS
    		}
 		public class UserSelectedEventArgs : EventArgs
 		{
-			public User SelectedUser { get; set; }
+			public Restaurant SelectedItem { get; set; }
 		}
 	
 

@@ -20,10 +20,11 @@ namespace Desmond.iOS
 			// Note: this .ctor should not contain any initialization logic.
 		}
 
-		public void UpdateUI(User user) 
+		public void UpdateUI(Restaurant res) 
 		{
-			this.lbName.Text = user.Name;
-			this.lbDescription.Text = user.Description;
+			this.lbName.Text = res.Name;
+			this.lbDescription.Text = res.Address;
+			this.imgPhoto.Image = UIImage.FromFile("Images/" + res.Image);
 		}
 	}
 }

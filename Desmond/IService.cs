@@ -5,6 +5,6 @@ namespace Desmond
 {
 	public interface IService
 	{
-		List<User> GetDemoUsers();
+		List<Restaurant> GetDemoRestaurants();
 	}
 }
