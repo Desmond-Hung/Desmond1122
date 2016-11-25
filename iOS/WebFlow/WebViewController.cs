@@ -1,4 +1,5 @@
 ﻿using System;
+using CoreGraphics;
 using Foundation;
 using UIKit;
 
@@ -65,7 +66,7 @@ namespace Desmond.iOS
 			//	return true;
 			//};
 			#endregion
-
+			SetButton();
 			btnGo.TouchUpInside += (sender, e) => 
 			{
 				ClickGo();
@@ -102,6 +103,18 @@ namespace Desmond.iOS
 		{
 			Console.WriteLine(web_URL);
 			this.viewWeb.LoadRequest(new NSUrlRequest(new NSUrl(web_URL)));
+		}
+
+		public void SetButton()
+		{
+			this.btnBack.Layer.CornerRadius = 8;
+			this.btnBack.Layer.ShadowColor = UIColor.Black.ColorWithAlpha((float)0.2).CGColor; // 陰影顏色
+			this.btnBack.Layer.ShadowOffset = new CGSize(0, 5); // 陰影偏移
+			this.btnBack.Layer.ShadowOpacity = (float)0.8; // 陰影透明
+			btnBack.TouchUpInside += (sender, e) =>
+			{
+				this.DismissViewController(true, null);
+			};
 		}
 	}
 }

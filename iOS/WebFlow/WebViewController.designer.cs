@@ -13,22 +13,25 @@ namespace Desmond.iOS
 	partial class WebViewController
 	{
 		[Outlet]
+		UIKit.UIButton btnBack { get; set; }
+
+		[Outlet]
 		UIKit.UIButton btnGo { get; set; }
 
 		[Outlet]
-		UIKit.NSLayoutConstraint btnGoBottomConstraint { get; set; }
+		UIKit.UITextField txtURL { get; set; }
 
 		[Outlet]
-		UIKit.UITextField txtURL { get; set; }
+		UIKit.UIView viewBackground { get; set; }
 
 		[Outlet]
 		UIKit.UIWebView viewWeb { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (btnGoBottomConstraint != null) {
-				btnGoBottomConstraint.Dispose ();
-				btnGoBottomConstraint = null;
+			if (btnBack != null) {
+				btnBack.Dispose ();
+				btnBack = null;
 			}
 
 			if (btnGo != null) {
@@ -39,6 +42,11 @@ namespace Desmond.iOS
 			if (txtURL != null) {
 				txtURL.Dispose ();
 				txtURL = null;
+			}
+
+			if (viewBackground != null) {
+				viewBackground.Dispose ();
+				viewBackground = null;
 			}
 
 			if (viewWeb != null) {
