@@ -13,10 +13,18 @@ namespace Desmond.iOS
 	partial class DetailViewController
 	{
 		[Outlet]
+		UIKit.UIButton btnMap { get; set; }
+
+		[Outlet]
 		UIKit.UIButton btnWeb { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnMap != null) {
+				btnMap.Dispose ();
+				btnMap = null;
+			}
+
 			if (btnWeb != null) {
 				btnWeb.Dispose ();
 				btnWeb = null;

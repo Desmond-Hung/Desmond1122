@@ -19,8 +19,39 @@ namespace Desmond.iOS
 
 			btnWeb.TouchUpInside += (sender, e) =>
 			{
-				PerformSegue("moveToWebViewSegue", this);
+				InvokeOnMainThread(() =>
+				{
+					PerformSegue("moveToWebViewSegue", this);
+				});
 			};
+			btnMap.TouchUpInside += (sender, e) =>
+			{
+				InvokeOnMainThread(() =>
+				{
+					PerformSegue("moveToMapViewSegue", this);
+				});
+			};
+		}
+
+		public override void PrepareForSegue(UIStoryboardSegue segue, Foundation.NSObject sender)
+		{
+			base.PrepareForSegue(segue, sender);
+
+			if (segue.Identifier == "moveToWebViewSegue")
+			{
+				if (segue.DestinationViewController is WebViewController)
+				{
+					var destViewController = segue.DestinationViewController as DetailViewController;
+				}
+			}
+			else if (segue.Identifier == "moveToMapViewSegue")
+			{
+				if (segue.DestinationViewController is MapViewController)
+				{ 
+					var destViewController = segue.DestinationViewController as MapViewController;
+					destViewController.myLocation = new Location() { Lat = 22.6267495, Lng = 120.323166 };
+				}
+			}
 		}
 
 		public override void DidReceiveMemoryWarning()

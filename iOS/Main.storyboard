@@ -186,14 +186,25 @@
                                 </constraints>
                                 <state key="normal" title="WebView"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xb-n4-8fj">
+                                <rect key="frame" x="16" y="629" width="64" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="uh2-hb-mN4"/>
+                                    <constraint firstAttribute="height" constant="30" id="zl5-7Y-LKk"/>
+                                </constraints>
+                                <state key="normal" title="MapView"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.98420815449999999" blue="0.82121378960000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="2dX-7Q-zRg" firstAttribute="top" secondItem="7Xb-n4-8fj" secondAttribute="bottom" constant="8" id="d2q-bP-pYm"/>
                             <constraint firstItem="ZKH-aA-qls" firstAttribute="trailing" secondItem="1WY-zE-oLe" secondAttribute="trailingMargin" id="dRk-na-f2k"/>
+                            <constraint firstItem="7Xb-n4-8fj" firstAttribute="leading" secondItem="1WY-zE-oLe" secondAttribute="leadingMargin" id="ivT-Kw-HqH"/>
                             <constraint firstItem="2dX-7Q-zRg" firstAttribute="top" secondItem="ZKH-aA-qls" secondAttribute="bottom" constant="8" id="olZ-ce-F85"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnMap" destination="7Xb-n4-8fj" id="M4O-qL-wpX"/>
                         <outlet property="btnWeb" destination="ZKH-aA-qls" id="R4i-eU-LPg"/>
                         <segue destination="Fm5-oq-xZA" kind="showDetail" identifier="moveToWebViewSegue" id="lDF-sh-FNs"/>
                         <segue destination="Rov-gq-ebG" kind="showDetail" identifier="moveToMapViewSegue" id="nTt-9k-c8O"/>
@@ -203,10 +214,10 @@
             </objects>
             <point key="canvasLocation" x="3400.8000000000002" y="138.98050974512745"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="tAa-bY-q55">
             <objects>
-                <viewController id="Rov-gq-ebG" sceneMemberID="viewController">
+                <viewController id="Rov-gq-ebG" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bp0-gh-gid"/>
                         <viewControllerLayoutGuide type="bottom" id="5z7-ti-XdX"/>
@@ -214,8 +225,22 @@
                     <view key="view" contentMode="scaleToFill" id="EHk-aT-gZI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GvO-T7-pMl">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5z7-ti-XdX" firstAttribute="top" secondItem="GvO-T7-pMl" secondAttribute="bottom" id="0bA-HC-GWc"/>
+                            <constraint firstItem="GvO-T7-pMl" firstAttribute="leading" secondItem="EHk-aT-gZI" secondAttribute="leading" id="BzT-Tj-bh0"/>
+                            <constraint firstAttribute="trailing" secondItem="GvO-T7-pMl" secondAttribute="trailing" id="dNn-2h-OL5"/>
+                            <constraint firstItem="GvO-T7-pMl" firstAttribute="top" secondItem="Bp0-gh-gid" secondAttribute="bottom" id="dnj-S3-uYU"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="viewMap" destination="GvO-T7-pMl" id="nrp-lj-Y8N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gv2-ks-ill" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -241,7 +266,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jIh-4f-Dzv" id="p3I-Nt-3N3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Kp-CI-xot">
