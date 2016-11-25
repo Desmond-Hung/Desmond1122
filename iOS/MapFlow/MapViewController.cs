@@ -21,6 +21,7 @@ namespace Desmond.iOS
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			openMap1();
+			SetButton();
 		}
 
 		private void openMap1()
@@ -66,6 +67,18 @@ namespace Desmond.iOS
 			//	alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 			//	PresentViewController(alert, true, null);
 			//}
+		}
+
+		public void SetButton()
+		{
+			this.btnBack.Layer.CornerRadius = 8;
+			this.btnBack.Layer.ShadowColor = UIColor.Black.ColorWithAlpha((float)0.2).CGColor; // 陰影顏色
+			this.btnBack.Layer.ShadowOffset = new CGSize(0, 5); // 陰影偏移
+			this.btnBack.Layer.ShadowOpacity = (float)0.8; // 陰影透明
+			btnBack.TouchUpInside += (sender, e) =>
+			{
+				this.DismissViewController(true, null);
+			};
 		}
 
 		public override void DidReceiveMemoryWarning()

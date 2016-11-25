@@ -26,9 +26,17 @@ namespace Desmond.iOS
 
 		[Outlet]
 		UIKit.UILabel txtPhone { get; set; }
+
+		[Outlet]
+		UIKit.UIView viewBackground { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (viewBackground != null) {
+				viewBackground.Dispose ();
+				viewBackground = null;
+			}
+
 			if (btnMap != null) {
 				btnMap.Dispose ();
 				btnMap = null;

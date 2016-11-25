@@ -13,10 +13,18 @@ namespace Desmond.iOS
 	partial class MapViewController
 	{
 		[Outlet]
+		UIKit.UIButton btnBack { get; set; }
+
+		[Outlet]
 		MapKit.MKMapView viewMap { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnBack != null) {
+				btnBack.Dispose ();
+				btnBack = null;
+			}
+
 			if (viewMap != null) {
 				viewMap.Dispose ();
 				viewMap = null;
